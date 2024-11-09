@@ -7,6 +7,7 @@ from utime import sleep
 
 # Pin zur Steuerung der Stromversorgung des BME280 (GPIO4)
 power_pin = Pin(4, Pin.OUT)
+led = Pin(2, Pin.OUT)
 
 # Initialisiere den I2C-Bus mit SDA auf GPIO21 und SCL auf GPIO22
 i2c = I2C(0, sda=Pin(21), scl=Pin(22))
@@ -62,6 +63,10 @@ def send_bme280_data():
 
     # Stromversorgung für den BME280 deaktivieren
     power_pin.off()
+    led.on()    # LED einschalten
+    time.sleep(0.5)
+    led.off()   # LED ausschalten
+    time.sleep(0.5)
 
 # Hauptprogramm
 print("Sende BME280-Daten an zwei Empfänger und gehe dann in Deep Sleep...")
